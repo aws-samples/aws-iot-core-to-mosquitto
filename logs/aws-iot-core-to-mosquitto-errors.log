@@ -1,0 +1,27 @@
+error: 30-Nov-2021 15:15:15: Connection Error: Failed to connect: libaws-c-mqtt: AWS_ERROR_MQTT_UNEXPECTED_HANGUP, The connection was closed unexpectedly.
+error: 30-Nov-2021 15:15:15: Unable to subscribe to Topic. Error: undefined.
+error: 30-Nov-2021 15:17:28: Connection Error: Failed to connect: libaws-c-mqtt: AWS_ERROR_MQTT_UNEXPECTED_HANGUP, The connection was closed unexpectedly.
+error: 30-Nov-2021 15:17:28: Unable to subscribe to Topic. Error: undefined.
+error: 30-Nov-2021 15:18:02: Connection Error: Failed to connect: libaws-c-mqtt: AWS_ERROR_MQTT_UNEXPECTED_HANGUP, The connection was closed unexpectedly.
+error: 30-Nov-2021 15:18:02: Unable to subscribe to Topic. Error: undefined.
+error: 30-Nov-2021 15:18:18: Connection Error: Failed to connect: libaws-c-mqtt: AWS_ERROR_MQTT_UNEXPECTED_HANGUP, The connection was closed unexpectedly.
+error: 30-Nov-2021 15:18:18: Unable to subscribe to Topic. Error: undefined.
+error: 30-Nov-2021 15:18:30: Connection Error: Failed to connect: libaws-c-mqtt: AWS_ERROR_MQTT_UNEXPECTED_HANGUP, The connection was closed unexpectedly.
+error: 30-Nov-2021 15:18:30: Unable to subscribe to Topic. Error: undefined.
+error: 30-Nov-2021 15:24:14: Error when connecting to Mosquitto broker: connect ECONNREFUSED 127.0.0.1:1883
+error: 30-Nov-2021 15:24:14: uncaughtException: Not able to publish data to Mosquitto. Error: Error: connect ECONNREFUSED 127.0.0.1:1883
+Error: Not able to publish data to Mosquitto. Error: Error: connect ECONNREFUSED 127.0.0.1:1883
+    at /Users/filhc/Documents/IoT/iotcore-to-mosquitto-listener/dist/controller/mosquitto.js:35:14
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 30-Nov-2021 16:00:05: Connection interrupted from IoT Core.
+error: 30-Nov-2021 16:00:05: Error: Error: libaws-c-mqtt: AWS_ERROR_MQTT_TIMEOUT, Time limit between request and response has been exceeded.
+    at MqttClientConnection._on_connection_interrupted (/Users/filhc/Documents/IoT/iotcore-to-mosquitto-listener/node_modules/aws-crt/dist/native/mqtt.js:291:32)
+    at /Users/filhc/Documents/IoT/iotcore-to-mosquitto-listener/node_modules/aws-crt/dist/native/mqtt.js:120:113
+error: 30-Nov-2021 16:06:00: Connection interrupted from IoT Core.
+error: 30-Nov-2021 16:06:00: Error: Error: libaws-c-mqtt: AWS_ERROR_MQTT_TIMEOUT, Time limit between request and response has been exceeded.
+    at MqttClientConnection._on_connection_interrupted (/Users/filhc/Documents/IoT/iotcore-to-mosquitto-listener/node_modules/aws-crt/dist/native/mqtt.js:291:32)
+    at /Users/filhc/Documents/IoT/iotcore-to-mosquitto-listener/node_modules/aws-crt/dist/native/mqtt.js:120:113
+error: 01-Dec-2021 17:23:25: Error when connecting to Mosquitto broker: connect ECONNREFUSED 127.0.0.1:1883
+error: 01-Dec-2021 17:23:25: Unable to subscribe to Topic. Error: Unable to create IoT Connection MQTT Client. Error : The "path" argument must be of type string. Received undefined.
+error: 01-Dec-2021 17:23:25: Unable to subscribe to Topic. Error: Unable to create IoT Connection MQTT Client. Error : The "path" argument must be of type string. Received undefined.
+error: 01-Dec-2021 17:23:25: Unable to subscribe to Topic. Error: Unable to create IoT Connection MQTT Client. Error : The "path" argument must be of type string. Received undefined.
