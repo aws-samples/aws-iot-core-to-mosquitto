@@ -1,0 +1,10 @@
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+//  SPDX-License-Identifier: MIT-0
+
+{
+  "presets": ["@babel/preset-env"],
+  "plugins": ["dynamic-import-node"],
+  "targets": {
+    "node": "current"
+  }
+}
