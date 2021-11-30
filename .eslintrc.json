@@ -1,0 +1,44 @@
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+//  SPDX-License-Identifier: MIT-0
+
+{
+  "env": {
+    "es2021": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:prettier/recommended",
+    "plugin:jest/recommended",
+    "plugin:jest/style"
+  ],
+  "plugins": ["prettier"],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "padded-blocks": 0,
+    "no-constant-condition": 0,
+    "indent": ["error", 2],
+    "quotes": ["error", "double"],
+    "no-console": "off",
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
+        "message": "Unexpected property on console object was called"
+      }
+    ],
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error"
+  },
+  "globals": {
+    "__dirname": true
+  }
+}

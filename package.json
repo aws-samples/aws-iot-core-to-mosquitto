@@ -1,0 +1,53 @@
+{
+  "name": "iotCore-to-mosquitto-listener",
+  "version": "1.0.0",
+  "description": "Application to listen from Message from AWS IoT Core and send them to a local Mosquitto broker",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "babel src -d dist",
+    "unit-test": "jest src --no-cache",
+    "jest": "jest",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "linting": "eslint src/*",
+    "start": "npm run build && nodemon -r dotenv/config --es-module-specifier-resolution=node dist/index.js",
+    "start-local": "npm run build && node -r dotenv/config --trace-warnings --interpreted-frames-native-stack --trace-uncaught --inspect-port=0.0.0.0:9229 dist/index.js",
+    "start-debug": "npm run build &&nodemon -r dotenv/config --trace-warnings --interpreted-frames-native-stack --trace-uncaught --inspect --es-module-specifier-resolution=node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Cesar Javaroni (filhc@amazon.com)",
+  "license": "MIT-0",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {
+    "app-root-path": "^3.0.0",
+    "async-mqtt": "^2.6.1",
+    "aws-crt": "^1.7.0",
+    "aws-iot-device-sdk-v2": "^1.5.0",
+    "dotenv": "^10.0.0",
+    "eslint-formatter-pretty": "^4.1.0",
+    "esm": "^3.2.25",
+    "mqtt": "^4.2.8",
+    "nodemon": "^2.0.15",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@jest/globals": "^27.3.1",
+    "babel-plugin-dynamic-import-node": "^2.3.3",
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^25.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.3.1",
+    "prettier": "^2.5.0"
+  }
+}

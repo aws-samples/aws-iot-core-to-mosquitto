@@ -1,0 +1,44 @@
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+version: "3.8"
+networks:
+  main:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: "ypfesp-listener"
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:1.6.9
+    expose:
+      - "1883"
+      - "9001"
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - config:/mosquitto/config
+    networks:
+      - main
+
+  aws-iot-core-to-mosquitto:
+    build: .
+    environment:
+      - ENV=dev
+      - DEVICE_ID=00123
+      - MQTT_BROKER_ADDRESS=a3hl5qqpv4sv4b-ats.iot.us-east-1.amazonaws.com
+      - MQTT_KEY_FILE=certs/local/4a0f8bcb9b-private.pem.key
+      - MQTT_CERT_FILE=certs/local/4a0f8bcb9b-certificate.pem.crt
+      - MQTT_CA_FILE=certs/AmazonRootCA1.pem
+      - MQTT_CLIENT_ID=aws_iot_core_to_mqtt_device_${DEVICE_ID}
+      - MOSQUITTO_URI=tcp://mosquitto:1883
+      - MQTT_PROTOCOL=mtls
+      - MQTT_BROKER_ADDRESS
+      - USE_PROXY=false
+      - PROXY_HOST=localhost
+      - PROXY_PORT=8888
+      - PROXY_USER=
+      - PROXY_PASS= 
+    networks:
+      - main
