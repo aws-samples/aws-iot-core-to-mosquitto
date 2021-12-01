@@ -36,8 +36,10 @@ ENV PROXY_USER=$PROXY_USER
 ENV PROXY_PASS=$PROXY_PASS
 
 COPY package*.json ./
+RUN npm install -g @babel/core @babel/cli @babel/preset-env babel-plugin-dynamic-import-node
 RUN npm install --only=prod
 COPY certs certs
 COPY src src
+COPY .babelrc.json .babelrc.json
 
-CMD npm run start
+CMD npm run start-local

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">53.84% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>7/13</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">53.84% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>7/13</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -108,18 +108,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -143,7 +143,10 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { publish as publishToMosquitto } from "./mosquitto";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+//  SPDX-License-Identifier: MIT-0
+&nbsp;
+import { publish as publishToMosquitto } from "./mosquitto";
 import {
   createConnectionConfigs as createConnectionToIotCore,
   createSubscribeOnConnectAndResume as createSubscriptionToIoTCoreTopic,
@@ -153,16 +156,13 @@ import logger from "../utils/winstonLogger";
 &nbsp;
 const decoder = new TextDecoder("utf8");
 &nbsp;
-// TO-DO Valdiate the mock callback
-/* istanbul ignore next */
-async function sendToDeneva(topic, payload) {
-  const decodePayload = decoder.decode(payload).replace(/\r?\n|\r/g, "");
-  logger.info(`Payload from Cloud: ${decodePayload}`);
-  const payloadObject = JSON.parse(decodePayload);
-  const targetTopic = JSON.stringify(payloadObject.destinationTopic);
-  //   const campaignsList = JSON.stringify(payloadObject.campaignsSortedList);
-  const campaignsList = payloadObject.campaignsSortedList;
-  await publishToMosquitto(targetTopic, JSON.stringify(campaignsList));
+async function <span class="fstat-no" title="function not covered" >sendToMosquitto(</span>topic, payload) {
+  const decodePayload = <span class="cstat-no" title="statement not covered" >decoder.decode(payload).replace(/\r?\n|\r/g, "");</span>
+<span class="cstat-no" title="statement not covered" >  logger.info(`Payload from Cloud: ${decodePayload}`);</span>
+  const payloadObject = <span class="cstat-no" title="statement not covered" >JSON.parse(decodePayload);</span>
+  const targetTopic = <span class="cstat-no" title="statement not covered" >JSON.stringify(payloadObject.mosquittoTopic);</span>
+  const messageToMosquitto = <span class="cstat-no" title="statement not covered" >payloadObject.message;</span>
+<span class="cstat-no" title="statement not covered" >  await publishToMosquitto(targetTopic, JSON.stringify(messageToMosquitto));</span>
 }
 // eslint-disable-next-line import/prefer-default-export
 export async function createSubscriptionAndConnectToTopic(topic) {
@@ -174,7 +174,7 @@ export async function createSubscriptionAndConnectToTopic(topic) {
       await createSubscriptionToIoTCoreTopic(
         iotConnection,
         topic,
-        sendToDeneva
+        sendToMosquitto
       );
       await iotConnection.connect();
     } else <span class="missing-if-branch" title="else path not taken" >E</span>{
@@ -193,7 +193,7 @@ export async function createSubscriptionAndConnectToTopic(topic) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Nov 29 2021 15:33:45 GMT-0300 (Brasilia Standard Time)
+                at Wed Dec 01 2021 01:54:27 GMT-0300 (Brasilia Standard Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

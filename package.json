@@ -4,14 +4,14 @@
   "description": "Application to listen from Message from AWS IoT Core and send them to a local Mosquitto broker",
   "main": "src/index.js",
   "scripts": {
-    "build": "babel src -d dist",
+    "build": "babel src -d dist -s",
     "unit-test": "jest src --no-cache",
     "jest": "jest",
     "test": "echo \"Error: no test specified\" && exit 1",
     "linting": "eslint src/*",
-    "start": "npm run build && nodemon -r dotenv/config --es-module-specifier-resolution=node dist/index.js",
+    "start": "npm run build && node -r dotenv/config --es-module-specifier-resolution=node dist/index.js",
     "start-local": "npm run build && node -r dotenv/config --trace-warnings --interpreted-frames-native-stack --trace-uncaught --inspect-port=0.0.0.0:9229 dist/index.js",
-    "start-debug": "npm run build &&nodemon -r dotenv/config --trace-warnings --interpreted-frames-native-stack --trace-uncaught --inspect --es-module-specifier-resolution=node src/index.js"
+    "start-debug": "nodemon -r dotenv/config --trace-warnings --interpreted-frames-native-stack --trace-uncaught --inspect --es-module-specifier-resolution=node --exec babel-node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -38,6 +38,7 @@
   "devDependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
     "@jest/globals": "^27.3.1",
     "babel-plugin-dynamic-import-node": "^2.3.3",

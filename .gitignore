@@ -49,7 +49,7 @@ Thumbs.db
 *.wmv
 
 docker/
-certs*
+certs/*
 
 docker-compose-cloud.yml
 docker-compose-local.yml
