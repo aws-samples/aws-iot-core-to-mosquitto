@@ -11,16 +11,13 @@ import logger from "../utils/winstonLogger";
 
 const decoder = new TextDecoder("utf8");
 
-// TO-DO Valdiate the mock callback
-/* istanbul ignore next */
-async function sendToDeneva(topic, payload) {
+async function sendToMosquitto(topic, payload) {
   const decodePayload = decoder.decode(payload).replace(/\r?\n|\r/g, "");
   logger.info(`Payload from Cloud: ${decodePayload}`);
   const payloadObject = JSON.parse(decodePayload);
-  const targetTopic = JSON.stringify(payloadObject.destinationTopic);
-  //   const campaignsList = JSON.stringify(payloadObject.campaignsSortedList);
-  const campaignsList = payloadObject.campaignsSortedList;
-  await publishToMosquitto(targetTopic, JSON.stringify(campaignsList));
+  const targetTopic = JSON.stringify(payloadObject.mosquittoTopic);
+  const messageToMosquitto = payloadObject.message;
+  await publishToMosquitto(targetTopic, JSON.stringify(messageToMosquitto));
 }
 // eslint-disable-next-line import/prefer-default-export
 export async function createSubscriptionAndConnectToTopic(topic) {
@@ -32,7 +29,7 @@ export async function createSubscriptionAndConnectToTopic(topic) {
       await createSubscriptionToIoTCoreTopic(
         iotConnection,
         topic,
-        sendToDeneva
+        sendToMosquitto
       );
       await iotConnection.connect();
     } else {

@@ -6,11 +6,11 @@ networks:
   main:
     driver: bridge
     driver_opts:
-      com.docker.network.bridge.name: "ypfesp-listener"
+      com.docker.network.bridge.name: "mosquitto-net"
 
 services:
   mosquitto:
-    image: eclipse-mosquitto:1.6.9
+    image: eclipse-mosquitto:2.0.10
     expose:
       - "1883"
       - "9001"
@@ -18,7 +18,7 @@ services:
       - "1883:1883"
       - "9001:9001"
     volumes:
-      - config:/mosquitto/config
+      - ./config:/mosquitto/config
     networks:
       - main
 
@@ -34,11 +34,10 @@ services:
       - MQTT_CLIENT_ID=aws_iot_core_to_mqtt_device
       - MOSQUITTO_URI=tcp://mosquitto:1883
       - MQTT_PROTOCOL=mtls
-      - MQTT_BROKER_ADDRESS
       - USE_PROXY=false
       - PROXY_HOST=localhost
       - PROXY_PORT=8888
       - PROXY_USER=
-      - PROXY_PASS= 
+      - PROXY_PASS=
     networks:
       - main
