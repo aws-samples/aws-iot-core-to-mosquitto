@@ -3,7 +3,9 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
 [![License: MIT--0](https://img.shields.io/badge/License-MIT--0-yellow.svg)](#)
 
-> In this document we built an Application that interfaces with the cloud and sends data to a local mosquitto Mqtt Broker. As of version 1.0.0 this application is only a one way communication from AWS Cloud to a Local Mosquitto broker. Future implementations will handle multi way communication. Included there is a docker file definition and a docker composer to setup the applciaiton and the mosquitto broker.
+> In this document we built an Application that interfaces with the cloud and sends data to a local mosquitto Mqtt Broker. As of version 1.0.0 this application is only a one way communication from AWS Cloud to a Local Mosquitto broker. Future implementations will handle multi way communication. Included there is a docker file definition and a docker composer to setup the application and the mosquitto broker.
+
+⛔️ There are variables between brackets {} that should be replaced by true values
 
 ## Objectives
 
@@ -14,9 +16,9 @@ This Code is intended for whom is engaging with customers that need a light cont
 This component is responsible for listening on messages on a AWS IoT Core topic in the format `cmd/localDevice/${process.env.ENV}/${process.env.DEVICE_ID}`. This is a command topic, containing information regarding on which topic the message should be published to Mosquitto Mqtt broker, the message, and just enough information to tie the received messaged to the source that generated it in the cloud. This information identifying the source is just for logging purposes.
 
 Information is processed in the cloud and sent in the command topic to the local device. The payload should contain at least the message to be sent to mosquitto and the topic that this message should be sent to. This topic should be known beforehand.
-This component is simply a bridge and should be as simple and fast as possible. Also, one assumption is that the local components are in a network constraint environment, behind the security firewalls and proxies for tsecurity purposes. For these motives, the mosquitto broker to connect allows anonymous connections without authentication.
+This component is simply a bridge and should be as simple and fast as possible. Also, one assumption is that the local components are in a network constraint environment, behind the security firewalls and proxies for security purposes. For these motives, the mosquitto broker to connect allows anonymous connections without authentication.
 
-The main function `start()` in `index.js` runs a process that create a connection configuration to AWS IoT Core based on enviromental variables containing device information, environment configuration variables and environment information, such as dev, or prod. Then, events are created to act on messages received from the cloud and the event callback function sends message to the local mosquitto broker. Aditionally the initial configuration add log capability when errors occur in the connection created to AWS IoT Core. The general overview can be seen as follows:
+The main function `start()` in `index.js` runs a process that create a connection configuration to AWS IoT Core based on environmental variables containing device information, environment configuration variables and environment information, such as dev, or prod. Then, events are created to act on messages received from the cloud and the event callback function sends message to the local mosquitto broker. Additionally the initial configuration add log capability when errors occur in the connection created to AWS IoT Core. The general overview can be seen as follows:
 
 ![AWS IoT Core to Mosquitto Solution](iotcore-to-mosquitto-listener/../docs/images/iotCore-to-mosquitto-Architecture.png)
 
@@ -45,13 +47,13 @@ npm install
 #### Running the application
 
 There some options to run the application locally for development purposes. Packages dotenv and nodemon are installed from the command above and babel will be used to transpile the application.
-For Environmental variables the applciaitons uses dotenv packages to build this variables, so when running locally don't forget to crate and set the .env file.
+For Environmental variables the applications uses dotenv packages to build this variables, so when running locally don't forget to crate and set the .env file.
 
 ---
 
 ##### For simple local run:
 
-> Create a .env file with the following fields and fill them with your AWS accoutn and thing data:
+> Create a .env file with the following fields and fill them with your AWS account and thing data:
 
 _Please fill all the data where the <...> are_
 
@@ -137,7 +139,7 @@ docker run aws-iot-core-to-mosquitto:dev
 
 ### Run a complete Solution with a localMOsquitto Broker and the AWS IoT Core connect solution
 
-The Project also includes a docker composer where you can build and test and run the moquitto broker and the current solution so you can observe the results directly in the components.
+The Project also includes a docker composer where you can build and test and run the mosquitto broker and the current solution so you can observe the results directly in the components.
 
 #### Build the docker compose Solution, run:
 
@@ -159,7 +161,7 @@ docker-compose up
 
 ### Expected response
 
-If the applciaiton was able to sucessfully connect and subscribe to AWs IoT core Topic the output should be something like:
+If the application was able to successfully connect and subscribe to AWs IoT core Topic the output should be something like:
 
 ```sh
 debug: 01-Dec-2021 04:30:38: Subscribing to IoT Topic
@@ -173,7 +175,7 @@ debug: 01-Dec-2021 04:30:39: Subscribed to topic without errors.
 
 ### Testing the app
 
-To test if the application is receveing correctly and sending data to a mosquitto broker. A message should be in the following format:
+To test if the application is receiving correctly and sending data to a mosquitto broker. A message should be in the following format:
 
 ```json
 {
@@ -196,7 +198,7 @@ info: 01-Dec-2021 04:41:11: Message Sent to Mosquitto Topic
 
 ### Check responses directly in the mosquitto broker container
 
-To check if the information is reaching the mosquitto broker, let's monitor the message isnide of it.
+To check if the information is reaching the mosquitto broker, let's monitor the message inside of it.
 
 Run `docker ps` and find out the container id for the `eclipse-mosquitto:2.0.10` container.
 
@@ -206,7 +208,7 @@ Begin an Interaction shell session with the container: `
 docker exec -it <Your Mosquitto Container Id> /bin/sh
 ```
 
-A session should begin and you would see a `/#` in fornt of your cursor. We are now inside the mosquitto container, run the folloqing command to listen to all topics arriving at the mosquitto Broker:
+A session should begin and you would see a `/#` in front of your cursor. We are now inside the mosquitto container, run the following command to listen to all topics arriving at the mosquitto Broker:
 
 ```sh
  mosquitto_sub -t \#
@@ -222,7 +224,7 @@ mosquitto_sub -t \#
 
 ### Run Unit tests
 
-The test suite used for this applciation is jest. THe mocking occured as close as possible of appliccation external access.
+The test suite used for this application is jest. THe mocking occurred as close as possible of application external access.
 
 ```sh
 npm run unit-test
@@ -230,7 +232,7 @@ npm run unit-test
 
 ### Run Linting
 
-Eslint with the airbnb-base style guide was used to lint the whole applicaiton.Please, run:
+Eslint with the airbnb-base style guide was used to lint the whole application. Please, run:
 
 ```sh
 npm run linting
