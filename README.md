@@ -55,28 +55,28 @@ For Environmental variables the applications uses dotenv packages to build this 
 
 > Create a .env file with the following fields and fill them with your AWS account and thing data:
 
-_Please fill all the data where the <...> are_
+_Please fill all the data where the {...} are_
 
 ```sh
-DEVICE_ID=<DEVICE_ID>
-MQTT_BROKER_ADDRESS=<AWS_IOT_ENDPOINT>
-MQTT_KEY_FILE=<DEVICE_PRIVATE_KEY>
-MQTT_CERT_FILE=<DEVICE_CERTIFICATE>
-MQTT_CA_FILE=<AMAZON_ROOT_CA>
+DEVICE_ID={DEVICE_ID}
+MQTT_BROKER_ADDRESS={AWS_IOT_ENDPOINT}
+MQTT_KEY_FILE={DEVICE_PRIVATE_KEY}
+MQTT_CERT_FILE={DEVICE_CERTIFICATE}
+MQTT_CA_FILE={AMAZON_ROOT_CA}
 MQTT_CLIENT_ID=aws_iot_core_to_mqtt_device
-ENV=<YOUR_ENVIRONMENT>
+ENV={YOUR_ENVIRONMENT}
 # Proxy Identification for IoT using proxy
 # mtls or wss
 MQTT_PROTOCOL=mtls
-USE_PROXY=false <true or false, wether to use proxy or not>
-PROXY_HOST=<PROXY_HOSTS>
-PROXY_PORT=<PROXY_PORT>
-PROXY_USER=<PROXY_USER>
-PROXY_PASS=<PROXY_PASSWORD>
+USE_PROXY=false #{true or false, wether to use proxy or not}
+PROXY_HOST={PROXY_HOSTS}
+PROXY_PORT={PROXY_PORT}
+PROXY_USER={PROXY_USER}
+PROXY_PASS={PROXY_PASSWORD}
 # AWS Credentials should be Set directly in the environment, not Through the docker layer.
 
 # Local MOsquitto MOSQUITTO_URI
-MOSQUITTO_URI=<MOSQUITTO_REFERENCE_URI> # usually mqtt://localhost:1883
+MOSQUITTO_URI={MOSQUITTO_REFERENCE_URI} # usually mqtt://localhost:1883
 ```
 
 After setting the .env file, run the application.
@@ -100,7 +100,7 @@ npm run start-debug
 
 ##### Building the image
 
-login into aws public ECR gallery with:
+Login into aws public ECR gallery with:
 
 ```sh
  aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
@@ -142,7 +142,6 @@ docker run aws-iot-core-to-mosquitto:dev
 The Project also includes a docker composer where you can build and test and run the mosquitto broker and the current solution so you can observe the results directly in the components.
 
 #### Build the docker compose Solution, run:
-
 <br/>
 
 Login in AWS public ECR repo to obtain the node image:
@@ -165,9 +164,9 @@ If the application was able to successfully connect and subscribe to AWs IoT cor
 
 ```sh
 debug: 01-Dec-2021 04:30:38: Subscribing to IoT Topic
-debug: 01-Dec-2021 04:30:38: MQTT Host: <YOUR IOT ENDPOINT>
+debug: 01-Dec-2021 04:30:38: MQTT Host: {YOUR IOT ENDPOINT}
 Subscribing to Topic cmd/localDevice/dev/00123
-debug: 01-Dec-2021 04:30:38: Connection Details: {"_events":{"error":[null,null]},"_eventsCount":3,"corked":false,"_handle":{},"client":{"handle":{},"bootstrap":{"handle":{}}},"config":{"client_id":"aws_iot_core_to_mqtt_device","host_name":"<YOUR IOT ENDPOINT>","socket_options":{"handle":{}},"port":443,"use_websocket":false,"clean_session":true,"keep_alive":30,"username":"?SDK=NodeJSv2&Version=1.10.2","tls_ctx":{"handle":{}},"ping_timeout":2000},"tls_ctx":{"handle":{}}}
+debug: 01-Dec-2021 04:30:38: Connection Details: {"_events":{"error":[null,null]},"_eventsCount":3,"corked":false,"_handle":{},"client":{"handle":{},"bootstrap":{"handle":{}}},"config":{"client_id":"aws_iot_core_to_mqtt_device","host_name":"{YOUR IOT ENDPOINT}","socket_options":{"handle":{}},"port":443,"use_websocket":false,"clean_session":true,"keep_alive":30,"username":"?SDK=NodeJSv2&Version=1.10.2","tls_ctx":{"handle":{}},"ping_timeout":2000},"tls_ctx":{"handle":{}}}
 Listening to messages on topic cmd/localDevice/dev/00123
 debug: 01-Dec-2021 04:30:39: Connected, Subscribing to Topic.
 debug: 01-Dec-2021 04:30:39: Subscribed to topic without errors.
@@ -205,7 +204,7 @@ Run `docker ps` and find out the container id for the `eclipse-mosquitto:2.0.10`
 Begin an Interaction shell session with the container: `
 
 ```sh
-docker exec -it <Your Mosquitto Container Id> /bin/sh
+docker exec -it {Your Mosquitto Container Id} /bin/sh
 ```
 
 A session should begin and you would see a `/#` in front of your cursor. We are now inside the mosquitto container, run the following command to listen to all topics arriving at the mosquitto Broker:
