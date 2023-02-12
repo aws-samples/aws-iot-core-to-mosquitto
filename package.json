@@ -29,7 +29,7 @@
     "eslint-formatter-pretty": "^4.1.0",
     "esm": "^3.2.25",
     "mqtt": "^4.3.7",
-    "nodemon": "^2.0.18",
+    "nodemon": "^2.0.20",
     "winston": "^3.8.0"
   },
   "devDependencies": {
